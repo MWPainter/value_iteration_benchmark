@@ -12,6 +12,12 @@ import math
 
 REPEAT = 4000000
 
+cdef int sLength = 6;
+cdef int vLength = 7;
+
+
+
+
 def run_cyth():
 	"""A function to compile for cython"""
 	cdef list s
@@ -19,7 +25,11 @@ def run_cyth():
 	cdef list sp
 	cdef list r
 	cdef list prob
-	cdef double[7] V
+
+	cdef double tol = 1e-6
+	cdef double[7] V = [0.0] * 7
+	cdef double[7] next_V = [0.0] * 7
+	cdef double max_diff = np.inf
 	cdef int counter = 0
 
 	s  	 = [   0,   0,   1,   1,   4,   4]
@@ -27,11 +37,6 @@ def run_cyth():
 	sp   = [   1,   4,   2,   3,   5,   6]
 	r    = [ 1.0, 0.0, 0.0, 1.0, 2.0, 4.0]
 	prob = [ 0.5, 0.5, 0.8, 0.2, 0.6, 0.4]
-
-	cdef double tol = 1e-6
-
-	V = [0.0] * 7
-	cdef double max_diff = np.inf
 
 	# while max_diff > tol:
 	for i in range(REPEAT):
@@ -51,4 +56,4 @@ def run_cyth():
 		V = next_V
 		counter += 1
 
-	print("Took {iter} iterations to converge".format(iter=counter))
+	print("Ran {iter} iterations to get value: {v}".format(iter=counter,v=V[0]))

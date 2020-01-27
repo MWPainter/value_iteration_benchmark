@@ -44,9 +44,9 @@ int main() {
 			}
 		}
 
-		// Copy nextV to V
+		// Copy nextV to V 
 		for (int sIndx=0; sIndx<vLength; sIndx++) {
-			V[sIndx] = nextV[sIndx];
+			V[sIndx] = nextV[sIndx]; // + double(counter); 
 		}
 
 		// Increment
@@ -54,5 +54,5 @@ int main() {
 	}
 
 	// Print something
-	std::cout << "Ran " << counter << " many iterations to converge." << std::endl;
+	std::cout << "Ran " << counter << " many iterations, to get value of: " << V[0] << std::endl;
 }

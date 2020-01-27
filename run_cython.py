@@ -1,2 +1,2 @@
-from vi_pyth import run_pyth
-run_pyth()
+from vi_cyth import run_cyth
+run_cyth()

@@ -20,12 +20,12 @@ def run_pyth():
 	prob = [ 0.5, 0.5, 0.8, 0.2, 0.6, 0.4]
 
 	tol = 1e-6
-
 	V = [0.0] * 7
 	max_diff = np.inf
+	counter = 0
 
 	# while max_diff > tol:
-	for i in range(REPEAT)
+	for _ in range(REPEAT):
 		# compute next V
 		next_V = [0.0] * 7
 		for i in range(len(s)):
@@ -38,8 +38,10 @@ def run_pyth():
 			if diff > max_diff:
 				max_diff = diff
 
-		# update V, counter
+		# update V, counter. 
 		V = next_V
 		counter += 1
 
-	print("Took {iter} iterations to converge".format(iter=counter))
+	print("Ran {iter} iterations to get value: {v}".format(iter=counter,v=V[0]))
+
+

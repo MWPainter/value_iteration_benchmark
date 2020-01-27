@@ -1,5 +1,5 @@
 from distutils.core import setup
 from Cython.Build import cythonize
 
-setup(name='Hello world app',
+setup(name='Cython Test',
       ext_modules=cythonize("vi_cyth.pyx"))
