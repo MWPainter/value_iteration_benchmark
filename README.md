@@ -5,11 +5,21 @@ After initially writing the cython implementation (the one found in the cython f
 
 
 
-Used to compare python vs cython vs c++.
 
 ## TL;DR
 
-C++ runs much faster than Python on CPU bound code, as compiling is faster than interpreting. Python can be compiled using the Cython compiler to speed it up. 
+C++ runs much faster than Python on CPU bound code, as compiling is faster than interpreting. Python can be compiled using the Cython compiler to speed it up. In this code we run a simple CPU bound process in C++, Python and Cython to compare performance. I've added the qualitative results in a box below:
+
+| What you want? | Solution |
+| - | - |
+| Code that matches the speed of C++ and can be used in Python | Write your code in C++ and write a Cython wrapper for it (no free lunch I'm afraid). | 
+| A significant speed up (of about 10x or more sometimes) | Use Cython, adding Cython types as much as required to reach desired speed. | 
+| A small speed up of my Python code without really having to do anything | The Cython compiler will compile Python code, and can lead of immediate speed ups of up to 2x speed. | 
+| <3 Python | Continue snaking :) | 
+
+
+
+
 
 Our experiments give the following times for equivalent code that runs a (bad) implementation of value iteration:
 1. C++ = 0.217s
@@ -43,7 +53,7 @@ This section aims to be an entry point to learning (the relevant parts of) Cytho
 | [Vector (List) Example In Cython And Type Conversions](http://docs.cython.org/en/latest/src/userguide/wrapping_CPlusPlus.html#standard-library) | Recommended (Because recommend to use C++ libraries for lists etc) | Example of using the vector class from the C++ STL in Cython code, and conversions between data types to and from C++ and Python. N.B. The link is for only a **portion** of the page, with the title (Standard Library). | 
 | [Pxd Files](https://cython.readthedocs.io/en/latest/src/tutorial/pxd_files.html) | Read (because its very short) | The first line basically says it all. They are like C header files. N.B. the cdef classes defined in these files can be used in all of C, C++ and Python, as a struct, C++ class and Python class respectively. |
 | [Caveats](https://cython.readthedocs.io/en/latest/src/tutorial/caveats.html) | Read (d.w. also short) | Some things to remember because C and Python aren't completely compatable | 
-| [https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html](https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html) | If you need fast code you need to read this (if you just need to understand some Cython skip) | Explains how to use the Python cProfile tool in Cython. |
+| [Profiling](https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html) | If you need fast code you need to read this (if you just need to understand some Cython skip) | Explains how to use the Python cProfile tool in Cython. |
  | [Typed Memoryviews](https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryviews) | Read to understand about typing system for arrays/lists | Describes the typed memoryview data types, which are used for lists and arrays (including numpy, so important if you plan to use numpy etc) | 
 | [Python Arrays](https://cython.readthedocs.io/en/latest/src/tutorial/array.html) | I skipped this | If you want to use python arrays this is the guide. Couldn't see why not just use the vector class from the STL. | 
 | [Using NumPy](https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html) | Skip | Some useful information about using Cython with NumPy, but hasn't been updated since Typed Memoryviews were introduced, so is a bit confusing. |
@@ -53,7 +63,7 @@ This section aims to be an entry point to learning (the relevant parts of) Cytho
 | [Using C++ Code](https://cython.readthedocs.io/en/latest/src/userguide/wrapping_CPlusPlus.html) | Skip | Describes how to use a C++ library in Cython *and* a use a Cython library in C++. (Remember [standard C libraries](https://github.com/cython/cython/tree/master/Cython/Includes) already have the relevant pxd's, so you likely never need to do this.) | 
 | [Compiler Directives](https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#compiler-directives) | Skip | Options to turn off checks (such as 'out of bounds' errors and so on). N.B. The link is for only a **portion** of the page, called Compiler Directives. | 
 | [Memory Allocation](https://cython.readthedocs.io/en/latest/src/tutorial/memory_allocation.html) | Skip | Low level memory allocation and pointers is one option for replacing Python lists in Cython, if you want that. | 
-| [FAQ](https://github.com/cython/cython/wiki/FAQ)[https://github.com/cython/cython/wiki/FAQ] | Reference | If something weird happens sometimes the answer was here and not on stack overflow :) | 
+| [FAQ](https://github.com/cython/cython/wiki/FAQ) | Reference | If something weird happens sometimes the answer was here and not on stack overflow :) | 
 
  
 Some bits of advice that I learned while making this repo:
