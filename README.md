@@ -83,7 +83,7 @@ Some bits of advice that I learned while making this repo:
 
 
 
-## Some Notes About This Code And How To Run It
+## Some Notes About This Code And How To Run It
 
 This repo contains seven different folders each containing code that performs the same (poor) hard coded value iteration. In each, the MDP is encoded in either lists or arrays. The MDP used is the same seven state MDP, which has a value of two in its initial state. Note that this value iteration is "poor" because it cannot take an arbitrary MDP, and it actually converges in two iterations while 4 million are run (so that the runtime isn't in micro seconds).
 
