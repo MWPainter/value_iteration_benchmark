@@ -142,7 +142,7 @@ Looking at the `vi_cython.html` report in the `cython_faster` folder shows that 
 
 After spending a little more time in the Cython documentation I found two solutions.
 
-Solution one is found in the `cython_optimised_carray` folder, which changes the list types to C array types. Importantly, the code below uses Python lists to instantiate C arrays. It is important to realise that the variables will now be C arrays, and not Python lists anymore, which means that a number of Python features are lost, such as automatic bounds checks and being able to append elements. However, this code is a lot faster as it doesn't have to rely on Python objects anymore.
+**Solution one** is found in the `cython_optimised_carray` folder, which changes the list types to C array types. Importantly, the code below uses Python lists to instantiate C arrays. It is important to realise that the variables will now be C arrays, and not Python lists anymore, which means that a number of Python features are lost, such as automatic bounds checks and being able to append elements. However, this code is a lot faster as it doesn't have to rely on Python objects anymore.
 
 The main changes in `cython_optimised_carray` are just in the cdefs:
 
@@ -159,7 +159,7 @@ The main changes in `cython_optimised_carray` are just in the cdefs:
 	cdef int len_s = len(s)
 ```
 
-Solution two is found in the `cython_optimized_vector` folder, which uses the `vector` class from the C++ STL. The `vector` class is templated, and provides similar functionality of Python lists in C++. Independent of any speed differences between the two optimized versions, this is my personal preferred solution to 'the second problem' in the cython code, as it allows for code more similar to standard Python.
+**Solution two** is found in the `cython_optimized_vector` folder, which uses the `vector` class from the C++ STL. The `vector` class is templated, and provides similar functionality of Python lists in C++. Independent of any speed differences between the two optimized versions, this is my personal preferred solution to 'the second problem' in the cython code, as it allows for code more similar to standard Python.
 
 A few more changes are required for this version. Firstly, a header is added to the file, to tell Cython to compile in C++: 
 ```
