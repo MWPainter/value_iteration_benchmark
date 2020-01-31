@@ -10,7 +10,7 @@ import math
 
 # all (s,a,s',r,Pr(s'|s,a)) tuples needed for value iteration in the given markov reward process above
 
-REPEAT = 4000000
+iterations = 4000000
 
 def run_pyth():
 	s  	 = [   0,   0,   1,   1,   4,   4]
@@ -19,24 +19,14 @@ def run_pyth():
 	r    = [ 1.0, 0.0, 0.0, 1.0, 2.0, 4.0]
 	prob = [ 0.5, 0.5, 0.8, 0.2, 0.6, 0.4]
 
-	tol = 1e-6
 	V = [0.0] * 7
-	max_diff = np.inf
 	counter = 0
 
-	# while max_diff > tol:
-	for _ in range(REPEAT):
+	for _ in range(iterations):
 		# compute next V
 		next_V = [0.0] * 7
 		for i in range(len(s)):
 			next_V[s[i]] += prob[i] * (r[i] + V[sp[i]])
-
-		# termination condition
-		max_diff = -np.inf
-		for s_indx in range(len(V)):
-			diff = abs(V[s_indx]-next_V[s_indx])
-			if diff > max_diff:
-				max_diff = diff
 
 		# update V, counter. 
 		V = next_V
